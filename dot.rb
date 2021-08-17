@@ -7,6 +7,7 @@ def getUdpSocket(host, port)
   socket
 end
 
+
 # Method to establish and  return a tcp ssl socket. 
 #     @param  host  [String]
 #     @param  port  [String]
@@ -34,13 +35,12 @@ require 'openssl'
 
 dns_host = '1.1.1.1'          # =>  Cloudflare DNS server IP address
 dns_port = 853                # =>  DNS server tls port
-#host='172.16.64.2'            # =>  IP address of the machine were this script runs
-host='192.168.29.27'            # =>  IP address of the machine were this script runs
+host='172.16.64.2'            # =>  IP address of the machine were this script runs
 port = 53                     # =>  DNS port
 
 loop do
   socket = getUdpSocket(host,port)  
-  mesg, addr = socket.recvfrom(4096)  # => variables mesg [String] & addr [Array]
+  mesg, addr = socket.recvfrom(4096)  # => variables mesg is a [String] & variable addr is an  [Array]
   query = "\x00"+mesg.length.chr + mesg
 
   sslSocket = getSslTcpConnection(dns_host,dns_port)
